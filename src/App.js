@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { ThemeProvider, createMuiTheme, Paper, Switch } from '@material-ui/core';
+import styles from './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const darkTheme = createMuiTheme({ palette: { type: "dark" } })
+const lightTheme = createMuiTheme({})
+
+
+export default function App() {
+
+   const [dark, setDark] = useState(true);
+   const toggleTheme = () => setDark(!dark);
+
+   return (
+      <ThemeProvider theme={dark ? darkTheme : lightTheme}>
+         <Paper style={{ minHeight: "100vh", borderRadius: 0 }} className={styles.mainContainer}>
+            Hello
+            <Switch size="small" color="secondary" onChange={toggleTheme} defaultChecked={dark} />
+
+            <div
+               style={{ fontFamily: "Fira Code" }}
+            >
+               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus nulla velit eius soluta quaerat alias numquam ab rem qui quod sequi voluptates, tempore ea aperiam itaque. Nihil itaque ratione vel omnis quo, labore quas dolorem excepturi aspernatur veniam neque commodi quod maiores numquam hic laboriosam dolorum voluptatum vero sit recusandae?
+            </div>
+         </Paper>
+      </ThemeProvider>
+   )
 }
-
-export default App;
